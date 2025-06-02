@@ -75,7 +75,10 @@
             <li><a href="index.html#best-sellers-section">Best Sellers</a></li>
             <li><a href="index.html#newsletter-section">Newsletter</a></li>
             <li class="menu-icon">
-              <img src="images/menu_icon.png" alt="메뉴 아이콘" />
+              <picture>
+                <source srcset="images/menu_icon.webp" type="image/webp" />
+                <img src="images/menu_icon.png" alt="메뉴 아이콘" />
+              </picture>
             </li>
           </ul>
         </nav>
@@ -84,10 +87,20 @@
 
     <section class="hero">
       <picture>
+        <source
+          media="(min-width: 1024px)"
+          srcset="images/Hero_Desktop.webp"
+          type="image/webp"
+        />
+        <source
+          media="(min-width: 768px)"
+          srcset="images/Hero_Tablet.webp"
+          type="image/webp"
+        />
         <source media="(min-width: 1024px)" srcset="images/Hero_Desktop.jpg" />
         <source media="(min-width: 768px)" srcset="images/Hero_Tablet.jpg" />
         <img
-          src="images/Hero_Mobile.jpg"
+          src="images/Hero_Mobile.webp"
           alt="VR 헤드셋 히어로 이미지"
           class="hero-image"
         />
@@ -114,11 +127,14 @@
         <div class="container">
           <div class="product new">
             <div class="product-picture">
-              <img
-                src="images/vr1.jpg"
-                alt="product: Penom Case"
-                loading="lazy"
-              />
+              <picture>
+                <source srcset="images/vr1.webp" type="image/webp" />
+                <img
+                  src="images/vr1.jpg"
+                  alt="product: Penom Case"
+                  loading="lazy"
+                />
+              </picture>
             </div>
             <div class="product-info">
               <h5 class="categories">Headsets, Apple</h5>
@@ -132,11 +148,14 @@
 
           <div class="product new">
             <div class="product-picture">
-              <img
-                src="images/vr2.jpg"
-                alt="product: Noise Cancelling Headphone"
-                loading="lazy"
-              />
+              <picture>
+                <source srcset="images/vr2.webp" type="image/webp" />
+                <img
+                  src="images/vr2.jpg"
+                  alt="product: Noise Cancelling Headphone"
+                  loading="lazy"
+                />
+              </picture>
             </div>
             <div class="product-info">
               <h5 class="categories">Headsets, PS</h5>
@@ -150,11 +169,14 @@
 
           <div class="product">
             <div class="product-picture">
-              <img
-                src="images/vr3.jpg"
-                alt="product: Canon Digital SLR EOS Rebel T6"
-                loading="lazy"
-              />
+              <picture>
+                <source srcset="images/vr3.webp" type="image/webp" />
+                <img
+                  src="images/vr3.jpg"
+                  alt="product: Canon Digital SLR EOS Rebel T6"
+                  loading="lazy"
+                />
+              </picture>
             </div>
             <div class="product-info">
               <h5 class="categories">Headsets, Oculus</h5>
