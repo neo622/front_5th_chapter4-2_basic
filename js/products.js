@@ -1,30 +1,49 @@
 async function loadProducts() {
-  const response = await fetch("https://fakestoreapi.com/products");
-  const products = await response.json();
-  displayProducts(products);
+  try {
+    const response = await fetch("https://fakestoreapi.com/products");
+    if (!response.ok) {
+      throw new Error(`error status: ${response.status}`);
+    }
+    const products = await response.json();
+    displayProducts(products);
+  } catch (error) {
+    console.error("Failed to load products:", error);
+    // 에러 발생 시 빈 배열로 처리하여 앱이 계속 동작하도록 함
+    displayProducts([]);
+  }
 }
 
 function displayProducts(products) {
-  // Find the container where products will be displayed
   const container = document.querySelector("#all-products .container");
+  if (!container) return;
 
-  // Iterate over each product and create the HTML structure safely
+  // DocumentFragment를 사용하여 DOM 조작 최적화
+  const fragment = document.createDocumentFragment();
+
   products.forEach((product) => {
-    // Create the main product div
     const productElement = document.createElement("div");
     productElement.classList.add("product");
 
-    // Create the product picture div
     const pictureDiv = document.createElement("div");
     pictureDiv.classList.add("product-picture");
+
+    // 이미지 최적화
     const img = document.createElement("img");
     img.src = product.image;
     img.alt = `product: ${product.title}`;
-    img.width = 250;
+    img.width = 128;
+    img.height = 128;
     img.loading = "lazy";
+    img.decoding = "async";
+
+    // 이미지 로드 에러 처리
+    img.onerror = () => {
+      img.src = "images/fallback.webp"; // 대체 이미지
+      img.onerror = null; // 무한 루프 방지
+    };
+
     pictureDiv.appendChild(img);
 
-    // Create the product info div
     const infoDiv = document.createElement("div");
     infoDiv.classList.add("product-info");
 
@@ -45,19 +64,18 @@ function displayProducts(products) {
     const button = document.createElement("button");
     button.textContent = "Add to bag";
 
-    // Append elements to the product info div
     infoDiv.appendChild(category);
     infoDiv.appendChild(title);
     infoDiv.appendChild(price);
     infoDiv.appendChild(button);
 
-    // Append picture and info divs to the main product element
     productElement.appendChild(pictureDiv);
     productElement.appendChild(infoDiv);
 
-    // Append the new product element to the container
-    container.appendChild(productElement);
+    fragment.appendChild(productElement);
   });
+
+  container.appendChild(fragment);
 }
 
 loadProducts();
